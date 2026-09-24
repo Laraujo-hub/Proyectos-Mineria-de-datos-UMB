@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Football Data API
+  description: API para consultar partidos, equipos y jugadores de fútbol.
+  version: "1.0.0"
+servers:
+  - url: https://api.football-data.org/v4
+paths:
+  /matches:
+    get:
+      summary: Obtener lista de partidos
+      parameters:
+        - name: dateFrom
+          in: query
+          description: Fecha inicial (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+        - name: dateTo
+          in: query
+          description: Fecha final (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lista de partidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  matches:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        homeTeam:
+                          type: string
+                        awayTeam:
+                          type: string
+                        score:
+                          type: object
